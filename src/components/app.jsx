@@ -48,7 +48,7 @@ function App() {
           "url('https://upload.wikimedia.org/wikipedia/commons/5/50/Clouds_white_sky.jpg')";
         break;
       case "Clear":
-        bgImageUrl = "url('/images/sunnyDay.jpg')";
+        bgImageUrl = "url('public/images/sunnyDay.jpg')";
         break;
       case "Atmosphere":
         bgImageUrl = "url('/images/sunnyDay.jpg')";
