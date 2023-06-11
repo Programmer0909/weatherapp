@@ -48,16 +48,16 @@ function App() {
           "url('https://upload.wikimedia.org/wikipedia/commons/5/50/Clouds_white_sky.jpg')";
         break;
       case "Clear":
-        bgImageUrl = "url('public/images/sunnyDay.jpg')";
+        bgImageUrl = "url('https://wallpaperaccess.com/full/1862305.jpg')";
         break;
       case "Atmosphere":
-        bgImageUrl = "url('/images/sunnyDay.jpg')";
+        bgImageUrl = "url('https://wallpaperaccess.com/full/1862305.jpg')";
         break;
       case "Rain":
-        bgImageUrl = "url('/images/rain.jpg')";
+        bgImageUrl = "url('https://wallpaperaccess.com/full/164289.jpg')";
         break;
       case "Drizzle":
-        bgImageUrl = "url('/images/surface-455120_1280.jpg')";
+        bgImageUrl = "url('https://wallpaperaccess.com/full/9350990.jpg')";
         break;
       case "Thunderstorm":
         bgImageUrl =
