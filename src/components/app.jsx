@@ -1,45 +1,44 @@
 import React, { useEffect, useState } from "react";
 import getData from "./apiFetch";
-// import ".."; // Import your CSS file for styling
 import Card from "./Card";
+import Loading from "./Loading";
 function App() {
   const [weather, setWeather] = useState(null);
-  const [city_name, curr_name] = useState("Katni");
+  const [cityName, setCityName] = useState("London");
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getData(city_name);
+      setLoading(true);
+      const data = await getData(cityName);
       setWeather(data);
+      setLoading(false);
     };
     fetchData();
-  }, [city_name]);
-  // function currr_name(){
-  //   const ct_name = Event.target.value;
-  //   city_name = ct_name;
-  //   console.log(city_name);
-  //   curr_name();
-  // }
-  const enterpressed = (e) => {
+  }, [cityName]);
+
+  const handleEnterPress = (e) => {
     if (e.keyCode === 13) {
-      console.log(e.currentTarget.value);
-      curr_name(e.currentTarget.value);
+      setCityName(e.currentTarget.value);
     }
   };
-  if (weather !== null) {
-    console.log(weather);
 
-    const wea_desc = weather.weather[0].description;
-    const icon_url =
+
+  if (loading) {
+    return <Loading />; 
+  } else if (weather !== null) {
+    const weaDesc = weather.weather[0].description;
+    const iconUrl =
       "https://openweathermap.org/img/wn/" +
       weather.weather[0].icon +
       "@2x.png";
     const temp = weather.main.feels_like;
     const humidity = weather.main.humidity;
     const pressure = weather.main.pressure;
-    const temp_min = weather.main.temp_min;
-    const temp_max = weather.main.temp_max;
+    const tempMin = weather.main.temp_min;
+    const tempMax = weather.main.temp_max;
     const wind = weather.wind.speed;
     const bgImg = weather.weather[0].main;
-
     let bgImageUrl = "";
 
     switch (bgImg) {
@@ -68,10 +67,11 @@ function App() {
           "url('https://img.freepik.com/premium-photo/beautiful-view-snowfall-ski-slope-surrounded-by-snowy-pine-forest-winter-fairy-tale_332511-706.jpg?w=2000')";
         break;
       default:
-        bgImageUrl =
-          "https://cdn.mos.cms.futurecdn.net/KtELxmwMbyZzPmPmLBpF2C-1200-80.jpg";
+        bgImageUrl = "url('https://wallpaperaccess.com/full/1862305.jpg')";
         break;
     }
+    console.log(bgImg)
+    console.log(bgImageUrl)
 
     const containerStyle = {
       margin: 0,
@@ -85,29 +85,48 @@ function App() {
     return (
       <div className="container" style={containerStyle}>
         <div className="main_body">
-          <div className="grid_container ">
+          <div className="grid_container">
             <div className="box">
-              City Name :{" "}
-              <input type="text" onKeyDown={enterpressed} placeholder="Katni" />
-              <button>Enter</button>
+              <div className="temp">
+                <span style={{ fontSize: "29px", paddingRight: "20px" }}>
+                  City Name :
+                </span>
+                <input
+                  style={{ borderRadius: "10px" }}
+                  type="text"
+                  onKeyDown={handleEnterPress}
+                  placeholder="Enter City Name"
+                />
+              </div>
             </div>
             <div className="middle">
               <div className="boxy">
-              <h1>{city_name}</h1>
-              <img src={icon_url} className="icon" />
-              <p className="temp">{temp} °C</p>
-              <p> {wea_desc}</p>
+                <h1>{cityName}</h1>
+                <img src={iconUrl} className="icon" alt="Weather Icon" />
+                <p className="temp">{temp} °C</p>
+                <p> {weaDesc}</p>
               </div>
             </div>
-            {/* <div className="bottom"></div> */}
           </div>
           <div className="bottom">
-            <div className="card1"><Card name="temp_max" item={temp_max} unit = "°C"/>  </div>
-            <div className="card2"><Card name="temp_min" item={temp_min} unit = "°C"/> </div>
-            <div className="card3"><Card name="temp" item={temp} unit = "°C"/></div>
-            <div className="card4"><Card name="wind" item={wind} unit = "m/s"/></div>
-            <div className="card5"><Card name="humidity" item={humidity} unit = "%"/></div>
-            <div className="card6"><Card name="pressure" item={pressure} unit = "hPa"/></div>
+            <div className="card1">
+              <Card name="temp_max" item={tempMax} unit="°C" />
+            </div>
+            <div className="card2">
+              <Card name="temp_min" item={tempMin} unit="°C" />
+            </div>
+            <div className="card3">
+              <Card name="temp" item={temp} unit="°C" />
+            </div>
+            <div className="card4">
+              <Card name="wind" item={wind} unit="m/s" />
+            </div>
+            <div className="card5">
+              <Card name="humidity" item={humidity} unit="%" />
+            </div>
+            <div className="card6">
+              <Card name="pressure" item={pressure} unit="hPa" />
+            </div>
           </div>
         </div>
       </div>
