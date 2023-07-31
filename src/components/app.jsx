@@ -80,6 +80,8 @@ function App() {
       backgroundRepeat: "no-repeat",
       width: "100%",
       height: "100vh",
+      backgroundPosition : "center center",
+      // backgroundposition: center center
     };
 
     return (
