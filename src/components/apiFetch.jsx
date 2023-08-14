@@ -10,6 +10,6 @@ const getData = async function (city) {
         .then((data) => data);
     return data;
     // console.log(data);
-};
+}; 
 
 export default getData;
